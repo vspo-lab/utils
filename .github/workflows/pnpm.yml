@@ -1,0 +1,7 @@
+name: pnpm build workflow
+
+on: [push]
+
+jobs:
+  build:
+    uses: ./.github/workflows/setup-pnpm-workflow.yml
