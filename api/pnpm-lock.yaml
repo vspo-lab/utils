@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vspo-lab/error':
-        specifier: workspace:^
-        version: link:../errors
+        specifier: github:vspo-lab/utils#v1.0.3&path:errors
+        version: https://codeload.github.com/vspo-lab/utils/tar.gz/bbfc89822cac50ad71c29686b271e130aefc8aa5#path:errors
       axios:
         specifier: ^1.9.0
         version: 1.12.2
@@ -520,6 +520,10 @@ packages:
 
   '@types/urijs@1.19.25':
     resolution: {integrity: sha512-XOfUup9r3Y06nFAZh3WvO0rBU4OtlfPB/vgxpjg+NRdGU6CN6djdc6OEiH+PcqHCY6eFLo9Ista73uarf4gnBg==}
+
+  '@vspo-lab/error@https://codeload.github.com/vspo-lab/utils/tar.gz/bbfc89822cac50ad71c29686b271e130aefc8aa5#path:errors':
+    resolution: {path: errors, tarball: https://codeload.github.com/vspo-lab/utils/tar.gz/bbfc89822cac50ad71c29686b271e130aefc8aa5}
+    version: 0.1.0
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -1792,6 +1796,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
 snapshots:
 
   '@apidevtools/json-schema-ref-parser@14.0.1':
@@ -2369,6 +2376,10 @@ snapshots:
   '@types/unist@3.0.3': {}
 
   '@types/urijs@1.19.25': {}
+
+  '@vspo-lab/error@https://codeload.github.com/vspo-lab/utils/tar.gz/bbfc89822cac50ad71c29686b271e130aefc8aa5#path:errors':
+    dependencies:
+      zod: 3.25.76
 
   abort-controller@3.0.0:
     dependencies:
@@ -3827,3 +3838,5 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  zod@3.25.76: {}
