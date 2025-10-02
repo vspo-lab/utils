@@ -21,7 +21,7 @@
     "tsup": "8.5.0"
   },
   "dependencies": {
-    "@vspo-lab/error": "workspace:^",
+    "@vspo-lab/error": "github:vspo-lab/utils#v1.0.3&path:errors",
     "axios": "^1.9.0"
   }
 }
