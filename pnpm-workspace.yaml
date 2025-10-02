@@ -1,16 +1,4 @@
 packages:
   - '*'
 
-catalog:
-  '@cloudflare/workers-types': ^4.20250927.0
-  '@types/node': ^24.0.0
-  dayjs: ^1.11.18
-  next: ^15.4.7
-  react: ^19.0.0
-  react-dom: ^19.0.0
-  tsup: ^8.5.0
-  typescript: ^5.9.2
-  wrangler: ^4.40.2
-  zod: ^3.25.76
-
 sharedWorkspaceLockfile: false

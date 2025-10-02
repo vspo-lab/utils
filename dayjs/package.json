@@ -15,11 +15,11 @@
   "author": "sugar-cat7",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "5.9.2",
+    "tsup": "8.5.0"
   },
   "dependencies": {
-    "dayjs": "catalog:",
-    "zod": "catalog:"
+    "dayjs": "1.11.18",
+    "zod": "3.25.76"
   }
 }
