@@ -15,8 +15,8 @@
   "author": "sugar-cat7",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "catalog:",
-    "tsup": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "24.0.0",
+    "typescript": "5.9.2",
+    "tsup": "8.5.0"
   }
 }

@@ -3,9 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "build": "turbo build"
+    "build": "turbo build",
+    "biome:check": "biome check ./**/**",
+    "biome:format": "biome format --write ./**/**",
+    "biome:lint": "biome lint --apply ./**/**",
+    "biome:unsafe-fix": "biome check --fix --unsafe",
+    "knip": "knip",
+    "tsc": "pnpm -r exec tsc --noEmit"
   },
   "author": "sugar-cat7",
   "license": "MIT",
@@ -13,11 +18,20 @@
     "@biomejs/biome": "^2.2.4",
     "@types/node": "^24.0.0",
     "turbo": "^2.5.8",
-    "semantic-release": "24.2.9"
+    "lefthook": "^1.13.4",
+    "semantic-release": "24.2.9",
+    "typescript": "5.9.2",
+    "knip": "^5.64.1"
   },
   "packageManager": "pnpm@10.17.1",
   "engines": {
     "pnpm": ">=9.15.9",
     "node": ">=20.18.0"
-  }
+  },
+  "workspaces": [
+    "api",
+    "dayjs",
+    "errors",
+    "logging"
+  ]
 }

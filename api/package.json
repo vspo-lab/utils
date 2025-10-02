@@ -17,12 +17,11 @@
   "license": "MIT",
   "devDependencies": {
     "orval": "^7.9.0",
-    "tsup": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "5.9.2",
+    "tsup": "8.5.0"
   },
   "dependencies": {
     "@vspo-lab/error": "workspace:^",
-    "axios": "^1.9.0",
-    "axios-retry": "^4.5.0"
+    "axios": "^1.9.0"
   }
 }

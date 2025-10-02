@@ -1,0 +1,26 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "api": {
+      "project": "src/**/*.ts"
+    },
+    "dayjs": {
+      "project": "**/*.ts"
+    },
+    "errors": {
+      "project": "**/*.ts"
+    },
+    "logging": {
+      "project": "**/*.ts"
+    }
+  },
+  "ignore": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "ignoreBinaries": [],
+  "ignoreDependencies": [
+    "lefthook"
+  ],
+  "ignoreExportsUsedInFile": true
+}
