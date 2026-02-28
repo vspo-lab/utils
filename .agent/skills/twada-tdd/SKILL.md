@@ -1,24 +1,22 @@
 ---
 name: twada-tdd
-description: t_wadaベースのテスト駆動開発戦略を使い、Red-Green-Refactorで小さく安全に実装を進める。新機能実装、バグ修正、リファクタリング時にテストファーストで仕様を固定したいときに使う。
+description: Test-driven development strategy based on t_wada. Progress safely in small steps using Red-Green-Refactor. Use when implementing new features, fixing bugs, or refactoring with a test-first approach.
 ---
 
-# トリガー条件
+# Trigger Conditions
 
-- 新機能を実装するとき
-- バグ修正を再発防止テストから始めるとき
-- 既存コードを安全にリファクタリングするとき
+- When implementing a new feature
+- When starting a bug fix with a regression-prevention test
+- When safely refactoring existing code
 
-# 実行チェックリスト
+# Execution Checklist
 
-1. `docs/web-frontend/twada-tdd.md` を確認し、対象を 1 振る舞いに絞る。
-2. 失敗するテスト（Red）を先に書く。
-3. テストを通す最小実装（Green）だけを入れる。
-4. 重複除去と命名改善のリファクタリングを行う。
-5. サイクルごとにテストを再実行し、次の振る舞いへ進む。
+1. Review `docs/testing/unit-testing.md` and narrow the target to one behavior.
+2. Write a failing test first (Red).
+3. Add only the minimal implementation to make the test pass (Green).
+4. Refactor: remove duplication and improve naming.
+5. Re-run tests after each cycle and move to the next behavior.
 
-# 参照ドキュメント
+# Reference Documents
 
-- `docs/web-frontend/twada-tdd.md` - t_wadaベースTDD戦略（本プロジェクト向け）
-- `docs/web-frontend/unit-testing.md` - Vitest運用、テーブルドリブンテスト
-- `docs/web-frontend/api-testing.md` - API統合テスト
+- `docs/testing/unit-testing.md` — Vitest usage, table-driven tests

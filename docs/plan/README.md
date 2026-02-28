@@ -1,64 +1,64 @@
 # Feature Plan (Spec-Driven Development)
 
-機能開発の仕様書をここに集約する。
-仕様が Single Source of Truth であり、口頭での決定は無効とする。
+Feature specifications live here.
+The spec is the Single Source of Truth — verbal agreements are not specs.
 
-## 原則: Spec更新 → 実装
+## Principle: Update Spec First, Then Code
 
-1. 仕様変更が発生したら、まず `docs/plan/<feature>/` のドキュメントを更新する
-2. ドキュメント更新後に、初めてコードを変更する
-3. 口頭やチャットでの合意は仕様ではない。書かれたものだけが仕様である
+1. When requirements change, update `docs/plan/<feature>/` first
+2. After the spec is updated, change the code
+3. Chat or verbal agreements are not specifications. Written documents count
 
-## ディレクトリ構成
+## Directory Structure
 
 ```
 docs/plan/
-├── README.md                    # 本ドキュメント
-└── <feature-name>/              # 機能ごとのディレクトリ
-    ├── 00_OVERVIEW.md           # 機能概要、目的、スコープ
-    ├── 01_DESIGN.md             # 型設計、公開API設計、依存関係
-    └── CHECKLIST.md             # 実装チェックリスト（フェーズ・セッションノート）
+├── README.md                    # This document
+└── <feature-name>/              # Per-feature directory
+    ├── 00_OVERVIEW.md           # Purpose, background, scope
+    ├── 01_DESIGN.md             # Type design, public API, dependencies
+    └── CHECKLIST.md             # Implementation checklist (phases + session notes)
 ```
 
-Claude Code の plan mode で自動生成されたファイル（`.md`）もこのディレクトリに保存される。
-feature ディレクトリと自動生成ファイルは名前形式が異なるため衝突しない。
+Claude Code plan mode auto-generated files (`.md`) are also saved in this directory.
+Feature directories and auto-generated files use different naming formats, so they do not conflict.
 
-## ワークフロー
+## Workflow
 
-### Step 1: 仕様生成 (`/plan-feature`)
+### Step 1: Spec Generation (`/plan-feature`)
 
-あいまいな要件から構造化された仕様ドキュメントを作成する。
+Create structured spec documents from ambiguous requirements.
 
-- 要件をヒアリングし、上記のファイル構成で仕様を書き出す
-- 未確定事項は `TBD` と明記し、次アクションを記録する
+- Gather requirements and produce the file structure above
+- Mark undecided items as `TBD` and record next actions
 
-### Step 2: チェックリスト生成 (`/init-impl`)
+### Step 2: Checklist Generation (`/init-impl`)
 
-仕様を読み込み、フェーズ分けされた実装チェックリストを生成する。
+Read the spec and generate a phased implementation checklist.
 
-- 実装順序はボトムアップ: 型定義 → コアロジック → テスト → ビルド確認
-- 各フェーズに目標、チェックリスト、テストコマンド、セッションノートを含む
-- セッションノートには Done / Next / Risks・TODO を記録する
+- Implementation order is bottom-up: type definitions -> core logic -> tests -> build verification
+- Each phase includes a goal, checklist, test commands, and session notes
+- Session notes record Done / Next / Risks & TODO
 
-### Step 3: フェーズ実行
+### Step 3: Phase Execution
 
-チェックリストに従い、フェーズごとに実装を進める。
+Execute the checklist, phase by phase.
 
-- 各フェーズの開始時にセッションノートを初期化する
-- 完了したタスクにチェックを付ける
-- 仕様変更が必要な場合は、まず仕様ドキュメントを更新してからコードを変更する
+- Initialize session notes at the start of each phase
+- Check off completed tasks
+- If the spec needs changing, update the spec document first, then change code
 
-## 仕様ファイル概要
+## Spec File Overview
 
-| ファイル | 内容 |
+| File | Contents |
 | --- | --- |
-| `00_OVERVIEW.md` | 機能の目的、背景、スコープ、成功指標 |
-| `01_DESIGN.md` | Zod Schema、公開API（エクスポート）、依存パッケージ、型定義 |
-| `CHECKLIST.md` | フェーズ分け実装チェックリスト、セッションノート |
+| `00_OVERVIEW.md` | Purpose, background, scope, success criteria |
+| `01_DESIGN.md` | Zod schemas, public API (exports), dependent packages, type definitions |
+| `CHECKLIST.md` | Phased implementation checklist, session notes |
 
-## チェックリスト構造
+## Checklist Structure
 
-`CHECKLIST.md` は以下の構造で作成する。各フェーズに Goal / Checklist / Testing / Session Notes を含む。
+`CHECKLIST.md` follows this structure. Each phase has Goal / Checklist / Testing / Session Notes.
 
 ```markdown
 # Implementation Checklist: <feature-name>
@@ -70,13 +70,13 @@ Document: `01_DESIGN.md`
 Status: Not started
 
 ### Goal
-型定義とコアロジックの実装、ユニットテスト
+Type definitions, core logic implementation, and unit tests
 
 ### Checklist
-- [ ] Zod Schema 定義
-- [ ] コアロジック実装
-- [ ] ユニットテスト
-- [ ] エクスポート設定
+- [ ] Zod schema definitions
+- [ ] Core logic implementation
+- [ ] Unit tests
+- [ ] Export configuration
 
 ### Testing
 pnpm -r exec vitest run
@@ -92,13 +92,13 @@ pnpm -r exec vitest run
 Status: Not started
 
 ### Goal
-ビルド確認と公開API検証
+Build verification and public API validation
 
 ### Checklist
-- [ ] ビルド成功確認（`pnpm build`）
-- [ ] 型チェック成功確認（`pnpm tsc`）
-- [ ] biome lint 通過
-- [ ] knip 未使用検出なし
+- [ ] Build passes (`pnpm build`)
+- [ ] Type check passes (`pnpm tsc`)
+- [ ] Biome lint passes
+- [ ] No unused exports detected by knip
 
 ### Testing
 ./scripts/post-edit-check.sh
@@ -109,29 +109,29 @@ Status: Not started
 - Risks/TODO:
 ```
 
-仕様に記載のない層のフェーズは省略してよい。
+Phases not relevant to the spec may be omitted.
 
-## セッションノートの書き方
+## Session Notes Format
 
-各フェーズの Session Notes には以下の3項目を必ず記録する。
+Each phase's Session Notes must record these 3 items:
 
 ```markdown
 ### Session Notes
 YYYY-MM-DD
-- Done: 完了したこと
-- Next: 次にやること
-- Risks/TODO: 未解決課題
+- Done: What was completed
+- Next: What to do next
+- Risks/TODO: Unresolved issues
 ```
 
-日をまたぐ場合やセッション復帰時に、この3項目で文脈を復元する。
+Use these 3 items to restore context when resuming across sessions or days.
 
-## Claude Code 連携
+## Claude Code Integration
 
-- `.claude/settings.json` の `plansDirectory` を `"./docs/plan"` に設定済み
-- Claude Code のプランモードで作成されたファイルも `docs/plan/` に保存される
-- プランファイルはバージョン管理対象とする
+- `.claude/settings.json` has `plansDirectory` set to `"./docs/plan"`
+- Files created in Claude Code plan mode are saved to `docs/plan/`
+- Plan files are version-controlled
 
-## 参照
+## References
 
-- `/plan-feature` - 仕様生成スキル
-- `/init-impl` - チェックリスト生成スキル
+- `/plan-feature` - Spec generation skill
+- `/init-impl` - Checklist generation skill

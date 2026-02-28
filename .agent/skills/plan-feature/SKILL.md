@@ -1,65 +1,53 @@
 ---
-name: 機能仕様策定
-description: あいまいな要件から docs/plan/<feature>/ に構造化された仕様ドキュメントを生成する。
+name: plan-feature
+description: Generate structured specification documents in docs/plan/<feature>/ from ambiguous requirements.
 user_invocable: true
 ---
 
-# 概要
+# Overview
 
-機能開発の仕様を策定する skill。
-あいまいな要件をヒアリングし、Clean Architecture のレイヤーに沿った仕様ドキュメントを `docs/plan/<feature>/` に生成する。
+A skill for drafting feature specifications.
+Gathers ambiguous requirements through a structured interview and generates spec documents in `docs/plan/<feature>/`.
 
-# 実行手順
+# Steps
 
-## Step 1: 要件ヒアリング
+## Step 1: Requirements Interview
 
-以下を1回の質問でまとめて確認する。
+Confirm the following in a single question:
 
-1. 機能名（英語ケバブケース: 例 `user-profile`）
-2. 機能の目的と背景（なぜ作るのか）
-3. 対象ユーザーと利用シナリオ
+1. Feature name (English kebab-case, e.g. `user-profile`)
+2. Purpose and background (why build this)
+3. Target users and usage scenarios
 4. In Scope / Out of Scope
-5. 影響するエンティティ（新規 or 既存変更）
-6. 主要ユースケース（1-5個）
-7. API エンドポイント（想定）
-8. フロントエンドの画面構成（想定）
-9. 未確定事項
+5. Affected entities (new or modified)
+6. Key use cases (1-5)
+7. Undecided items
 
-## Step 2: 仕様ドキュメント生成
+## Step 2: Generate Spec Documents
 
-回答をもとに `docs/plan/<feature>/` に以下のファイルを作成する。
-各ファイルの記載項目は `docs/plan/README.md` の仕様ファイル概要を参照すること。
+Based on the answers, create the following files in `docs/plan/<feature>/`.
+Refer to the spec file overview in `docs/plan/README.md` for what each file should contain.
 
-- `00_OVERVIEW.md` - 機能概要、目的、スコープ
-- `01_DOMAIN_MODEL.md` - エンティティ変更、ビジネスルール
-- `02_DATA_ACCESS.md` - リポジトリ・DB変更
-- `03_USECASE.md` - UseCase層の変更
-- `04_API_INTERFACE.md` - APIエンドポイント仕様
-- `05_FRONTEND.md` - フロントエンドUI仕様
+- `00_OVERVIEW.md` — Purpose, background, scope, success criteria
+- `01_DESIGN.md` — Zod schemas, public API (exports), dependent packages, type definitions
 
-バックエンドのみ/フロントエンドのみの場合は不要なファイルを省略してよい。
-未確定の部分は `TBD` と明記する。
+Omit files that are not relevant to the feature.
+Mark undecided parts as `TBD`.
 
-## Step 3: 仕様レビューサマリー
+## Step 3: Spec Review Summary
 
-生成後に以下を提示する。
+After generation, present:
 
-1. 生成したファイル一覧
-2. 確定事項のサマリー
-3. 未確定事項と次に決めるべき論点
-4. `docs/domain/` への反映が必要な場合の案内
+1. List of generated files
+2. Summary of confirmed items
+3. Undecided items and next decisions to make
 
-# ルール
+# Rules
 
-- 仕様は `docs/plan/<feature>/` に集約する（他の場所に分散させない）
-- エンティティ定義は Zod Schema First（`docs/backend/domain-modeling.md` 準拠）
-- 重要な判断は `docs/domain/decisions.md` にも転記を案内する
+- Specs are consolidated in `docs/plan/<feature>/` (do not scatter elsewhere)
+- Entity definitions follow Zod Schema First
+- Important decisions should be recorded in the spec documents
 
-# 参照ドキュメント
+# Reference Documents
 
 - `docs/plan/README.md`
-- `docs/domain/README.md`
-- `docs/backend/server-architecture.md`
-- `docs/backend/domain-modeling.md`
-- `docs/backend/api-design.md`
-- `docs/web-frontend/architecture.md`

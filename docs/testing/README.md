@@ -1,34 +1,34 @@
 # Testing Strategy Overview
 
-このディレクトリは、テスト種別ごとの実装方針の Single Source of Truth。
+This directory is the Single Source of Truth for testing policies by test type.
 
-## 共通原則
+## Core Principles
 
-- t_wada ベースの `Red-Green-Refactor` を短いサイクルで回す
-- テーブルドリブンテスト（`it.each` / `test.each`）を基本形にする
-- デフォルトは「モックしない」。内部依存は実体を通す
-- 例外として、外部SaaS・ネットワーク通信など自分たちが制御できない境界のみモックする
-- 実装詳細ではなく、利用者から見える振る舞いを検証する
+- Follow t_wada-based `Red-Green-Refactor` in short cycles
+- Use table-driven tests (`it.each` / `test.each`) as the default form
+- Default: do not mock. Pass real implementations for internal dependencies
+- Exception: mock non-deterministic boundaries you do not control (external SaaS, network calls)
+- Verify behavior visible to the caller, not implementation details
 
-## テストタイプと責務
+## Test Types and Responsibilities
 
-| 種別 | 目的 | 主なツール | 方針 |
+| Type | Purpose | Primary Tool | Policy |
 | --- | --- | --- | --- |
-| Unit | 関数・ユーティリティの局所的な振る舞い確認 | Vitest | 高速・純粋・副作用最小 |
+| Unit | Verify local behavior of functions and utilities | Vitest | Fast, pure, minimal side effects |
 
-## カバレッジポリシー
+## Coverage Policy
 
-| 対象パッケージ | 最低カバレッジ | CI 強制 |
+| Package | Minimum Coverage | CI Enforced |
 | --- | --- | --- |
 | `api/**` | 60% | Yes |
 | `dayjs/**` | 60% | Yes |
 | `errors/**` | 60% | Yes |
 | `logging/**` | 60% | Yes |
 
-- カバレッジが閾値を下回る PR は CI で失敗させる
-- 閾値は段階的に引き上げる（初期設定は控えめに）
-- カバレッジのための無意味なテストは書かない。振る舞いを検証するテストで自然に到達する
+- PRs that fall below the threshold fail CI
+- Thresholds are raised incrementally (initial settings are conservative)
+- Do not write meaningless tests for coverage. Reach coverage naturally through behavior-verifying tests
 
-## ドキュメント一覧
+## Documents
 
 - [unit-testing.md](./unit-testing.md)

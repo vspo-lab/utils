@@ -1,20 +1,14 @@
 ---
-name: テスト
-description: Vitestを中心に Unit/Integration/API/UI/VRT/E2E を実装する総合テストスキル。テーブルドリブンとモック最小方針で品質を段階的に保証するときに使う。
+name: testing
+description: Comprehensive testing skill centered on Vitest for unit tests. Uses table-driven tests and minimal mocking to incrementally guarantee quality.
 ---
 
-# トリガー条件
+# Trigger Conditions
 
-- テストファイル（`*.test.ts`）を作成・編集するとき
-- 新機能のテストを書くとき
+- When creating or editing test files (`*.test.ts`)
+- When writing tests for new functionality
 
-# 参照ドキュメント
+# Reference Documents
 
-- `docs/testing/README.md` - テスト戦略の全体像
-- `docs/testing/unit-testing.md` - Unitテスト
-- `docs/testing/integration-testing.md` - Integrationテスト
-- `docs/testing/api-testing.md` - APIテスト
-- `docs/testing/ui-testing.md` - UIテスト
-- `docs/testing/vrt-testing.md` - VRT
-- `docs/testing/e2e-testing.md` - E2E
-- `docs/web-frontend/twada-tdd.md` - t_wadaベースTDD戦略
+- `docs/testing/README.md` — Testing strategy overview
+- `docs/testing/unit-testing.md` — Unit testing policy

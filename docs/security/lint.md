@@ -1,19 +1,19 @@
 # Lint / Quality Check
 
-## 概要
+## Overview
 
-このドキュメントは、リポジトリで実施する品質チェックの最小セットを定義します。
-コードとドキュメントの両方で、PR前に同じ手順を実行してください。
+This document defines the required quality checks for the repository.
+Run these steps before every PR for both code and documentation changes.
 
-## 必須チェック（全変更共通）
+## Required Checks (All Changes)
 
-変更後は、次のコマンドを必ず実行します。
+After any change, run:
 
 ```bash
 ./scripts/post-edit-check.sh
 ```
 
-`post-edit-check.sh` は以下を順に実行します。
+`post-edit-check.sh` runs the following in order:
 
 ```bash
 pnpm build
@@ -22,24 +22,24 @@ pnpm knip
 pnpm tsc
 ```
 
-## ドキュメント変更時の追加チェック
+## Additional Checks for Documentation Changes
 
-`docs/` を更新した場合は、次も確認してください。
+When updating `docs/`, also verify:
 
-1. 見出し構造（`#` -> `##` -> `###`）が崩れていない
-2. 用語のゆれがない（同じ概念は同じ語を使う）
-3. 参照リンクが存在し、相対パスが正しい
-4. `pnpm textlint` が成功する
+1. Heading hierarchy (`#` -> `##` -> `###`) is not broken
+2. Terminology is consistent (use the same word for the same concept)
+3. Reference links exist and relative paths are correct
+4. `pnpm textlint` passes
 
-textlint の運用方針と導入例は [docs/security/textlint.md](./textlint.md) を参照してください。
+See [docs/security/textlint.md](./textlint.md) for textlint usage and configuration.
 
-## アーキテクチャ lint ルール（AI レビュー対象）
+## Architecture Lint Rules (AI Review)
 
-以下のルールは自動 lint では完全に検出できませんが、コードレビューで確認します。
-`/code-review` スキルがこれらのルールをチェックします。
+The following rules cannot be fully detected by automated linting but are checked during code review.
+The `/code-review` skill checks these rules.
 
-| ルール | 対象 | 検出方法 |
+| Rule | Scope | Detection |
 | --- | --- | --- |
-| 公開関数に JSDoc（事前条件・事後条件）必須 | 全パッケージ | AI レビュー |
-| try-catch 禁止（Result 型必須） | 全体 | AI レビュー |
-| interface 直接定義禁止（Zod Schema First） | 全体 | AI レビュー |
+| JSDoc required on public functions (preconditions, postconditions) | All packages | AI review |
+| No try-catch (Result type required) | All code | AI review |
+| No direct interface definitions (Zod Schema First) | All code | AI review |

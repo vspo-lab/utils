@@ -1,48 +1,48 @@
 ---
 name: research
-description: Context7 MCPを使った技術調査・仕様確認スキル。ライブラリ/フレームワークの最新ドキュメント確認、API仕様の裏取り、バージョン差分の確認、実装方針の根拠収集を行うときに使う。特に「最新」「推奨」「breaking change」「移行手順」の調査で使用する。
+description: Technical research and spec verification using Context7 MCP. Use for checking latest library/framework documentation, validating API specs, verifying version differences, and gathering evidence for implementation decisions. Especially useful for "latest", "recommended", "breaking change", and "migration" investigations.
 ---
 
-# トリガー条件
+# Trigger Conditions
 
-- 「最新仕様を調べたい」「公式の推奨を確認したい」といった調査依頼を受けたとき
-- ライブラリやフレームワークの導入・アップグレード前に互換性確認が必要なとき
-- 実装方針の根拠を、一次情報ベースで提示する必要があるとき
+- When asked to research latest specs or official recommendations
+- When compatibility checks are needed before introducing or upgrading a library/framework
+- When implementation decisions need evidence backed by primary sources
 
-# 調査フロー
+# Research Flow
 
-1. 調査対象のライブラリ名、対象バージョン、実装目的を明確化する
-2. `mcp__context7__resolve-library-id` でライブラリIDを確定する
-3. `mcp__context7__query-docs` でユースケース単位に調査する
-4. 重要事項は英語版の一次情報で裏取りする（公式docs / 公式ブログ / release notes / RFC）
-5. 回答を「結論 → 根拠 → 影響範囲 → 未確定事項」の順で整理する
+1. Clarify the target library name, version, and implementation purpose
+2. Resolve the library ID with `mcp__context7__resolve-library-id`
+3. Query documentation per use case with `mcp__context7__query-docs`
+4. Verify key findings against English primary sources (official docs / blog / release notes / RFC)
+5. Organize the answer as: Conclusion -> Evidence -> Impact Scope -> Open Items
 
-# 重要ルール
+# Key Rules
 
-- 技術調査の主ソースは Context7 MCP とする
-- 技術ドキュメントは英語版を優先して参照する
-- 日本語記事は補助情報として扱い、断定は一次情報で裏取りした内容に限定する
-- 「最新」「今日時点」の依頼では、参照日時・更新日・対象バージョンを明記する
-- 破壊的変更（breaking changes）、非推奨化（deprecation）、セキュリティ修正は release notes/changelog まで確認する
-- 推測と事実を混在させない。推測は明示する
+- Primary source for technical research is Context7 MCP
+- Prefer English versions of technical documentation
+- Treat non-primary sources as supplementary; limit assertions to information verified against primary sources
+- For "latest" or "as of today" requests, include the reference date, update date, and target version
+- For breaking changes, deprecations, and security fixes, verify against release notes / changelog
+- Do not mix speculation with facts. Clearly label speculation
 
-# Context7が使えない場合
+# Fallback (Context7 Unavailable)
 
-- 公式ドキュメント、公式GitHub、公式リリースノートを優先して参照する
-- 代替調査で得た情報は「Context7未使用」の注記を付ける
-- 根拠が弱い情報は、実装確定前に追加確認タスクとして分離する
+- Prefer official documentation, official GitHub, and official release notes
+- Annotate information obtained through alternative research as "Context7 not used"
+- Separate weakly-supported information as additional verification tasks before implementation
 
-# 出力フォーマット
+# Output Format
 
-- `結論`: 最短で意思決定できる要点
-- `根拠`: 参照元リンク（英語版優先）と要点
-- `影響範囲`: 変更が必要な層・ファイル・設定
-- `未確定事項`: 追加で確認すべき項目
+- `Conclusion`: key points for the quickest decision
+- `Evidence`: source links (English preferred) and key takeaways
+- `Impact scope`: affected layers, files, and configuration
+- `Open items`: items requiring further investigation
 
-# 調査品質チェック
+# Quality Checklist
 
-- ライブラリ名・バージョン・実行環境（Node/Browser/Edgeなど）を明示したか
-- 参照元が一次情報中心になっているか
-- 日付とバージョンの整合が取れているか
-- 推測と事実が分離されているか
-- 実装に直結する次アクションを提示したか
+- Library name, version, and runtime environment (Node/Browser/Edge, etc.) are stated
+- Sources are primarily first-party
+- Dates and versions are consistent
+- Speculation and facts are separated
+- Actionable next steps directly tied to implementation are provided

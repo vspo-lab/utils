@@ -21,8 +21,7 @@
   "ignoreBinaries": [],
   "ignoreDependencies": [
     "lefthook",
-    "@textlint/textlint-plugin-markdown",
-    "textlint-rule-preset-ja-technical-writing"
+    "textlint-rule-write-good"
   ],
   "ignoreExportsUsedInFile": true
 }

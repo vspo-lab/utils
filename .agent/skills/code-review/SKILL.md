@@ -1,51 +1,38 @@
 ---
-name: コードレビュー
-description: アーキテクチャルールに基づくPR/コードレビュー。UseCase実装ルール、Result型、JSDoc規約の違反を検出する。
+name: code-review
+description: Architecture-rule-based PR/code review. Detects violations of Result type, Zod Schema First, JSDoc conventions, and test coverage requirements.
 user_invocable: true
 ---
 
-# トリガー条件
+# Trigger Conditions
 
-- ユーザーからコードレビューを依頼されたとき
-- PR の差分を確認するとき
+- When the user requests a code review
+- When reviewing PR diffs
 
-# レビューチェックリスト
+# Review Checklist
 
-## アーキテクチャ違反
+## Code Conventions
 
-1. UseCase から UseCase を呼んでいないか
-2. UseCase 内で環境変数に直接アクセスしていないか
-3. UseCase 内で直接 PubSub/メッセージキューを操作していないか
-4. UseCase が「上から下への逐次実行」になっているか
-5. ループ内に複数条件分岐がないか
+1. No try-catch (Result type required — `Ok`, `Err`, `wrap`, `AppError` from `@vspo-lab/error`)
+2. No direct interface definitions (Zod Schema First — use `z.infer<typeof schema>`)
+3. Public functions have JSDoc with preconditions and postconditions
 
-## コード規約
+## Tests
 
-6. try-catch を使っていないか（Result 型必須）
-7. interface を直接定義していないか（Zod Schema First）
-8. Domain/UseCase の公開関数に JSDoc（事前条件・事後条件）があるか
-9. UseCase 関数に冪等性（`@idempotent`）が記述されているか
+4. Added or changed functions have accompanying tests
 
-## テスト
+# Output Format
 
-10. Domain 関数の追加・変更にテストが伴っているか
+Report each finding in the following format:
 
-# 出力形式
+- `Location`: file path + line number
+- `Violated rule`: corresponding docs/ document + section name
+- `Violation`: one-sentence description
+- `Suggested fix`: minimal-change fix approach
 
-各指摘を以下の形式で出力する:
+If no rule source can be cited, separate the item as an "improvement suggestion" rather than asserting it as a violation.
 
-- `違反箇所`: ファイルパス + 行番号
-- `違反ルール`: docs/ 内の該当ドキュメント + セクション名
-- `違反内容`: 1 文で具体化
-- `修正案`: 最小変更での修正方針
+# Reference Documents
 
-ルール出典を示せない場合は「改善提案」として分離し、違反指摘として断定しない。
-
-# 参照ドキュメント
-
-- `docs/backend/usecase-rules.md` - UseCase実装ルール
-- `docs/backend/function-documentation.md` - 関数ドキュメント規約
-- `docs/backend/server-architecture.md` - アーキテクチャ全体
-- `docs/backend/domain-modeling.md` - ドメインモデル設計
-- `docs/backend/pr-guidelines.md` - PRガイドライン
-- `docs/security/lint.md` - Lint / Quality Check
+- `docs/security/lint.md` — Lint / Quality Check
+- `docs/testing/unit-testing.md` — Unit testing policy

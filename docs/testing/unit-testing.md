@@ -1,31 +1,31 @@
-# Unit Testing 実装方針
+# Unit Testing Policy
 
-## 目的
+## Purpose
 
-- 純粋関数・ユーティリティの振る舞いを高速に保証する
-- 仕様の粒度を小さく保ち、TDD の最短フィードバックループを回す
+- Guarantee behavior of pure functions and utilities at high speed
+- Keep specification granularity small and run the shortest TDD feedback loop
 
-## 対象
+## Scope
 
-- `api/src/**` の API ユーティリティ
-- `dayjs/**` の日時ユーティリティ
-- `errors/**` のエラーハンドリング
-- `logging/**` のロギングユーティリティ
+- `api/src/**` — API utilities
+- `dayjs/**` — date/time utilities
+- `errors/**` — error handling
+- `logging/**` — logging utilities
 
-## 実装ルール
+## Implementation Rules
 
-1. 1テスト1振る舞いを守る
-2. `it.each` / `test.each` によるテーブルドリブンを標準にする
-3. `Red -> Green -> Refactor` を1ケースずつ進める
-4. 実装詳細（private関数、内部state）ではなく、入出力契約を検証する
+1. One test, one behavior
+2. Use `it.each` / `test.each` table-driven tests as the standard form
+3. Progress `Red -> Green -> Refactor` one case at a time
+4. Verify input/output contracts, not implementation details (private functions, internal state)
 
-## モック方針
+## Mocking Policy
 
-- デフォルト: モックしない
-- 許可: 時刻、乱数、外部通信のような非決定要素のみ最小限で固定する
-- 禁止: 内部モジュールの過剰モックで実装詳細に結びつけること
+- Default: do not mock
+- Allowed: fix non-deterministic factors such as time, randomness, and external communication
+- Prohibited: excessive mocking of internal modules that couples tests to implementation details
 
-## テーブルドリブンの基本形
+## Table-Driven Test Template
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -42,12 +42,12 @@ describe("normalizeText", () => {
 });
 ```
 
-## 実行コマンド
+## Commands
 
-- 全体: `pnpm -r exec vitest run`
-- 特定パッケージ: `pnpm --filter @vspo-lab/error exec vitest run`
+- All packages: `pnpm -r exec vitest run`
+- Specific package: `pnpm --filter @vspo-lab/error exec vitest run`
 
-## 参考（一次情報）
+## References
 
 - Vitest `test.each`: https://vitest.dev/api/#test-each
-- Vitest Mocking（過剰モックの注意）: https://vitest.dev/guide/mocking.html
+- Vitest Mocking (avoid over-mocking): https://vitest.dev/guide/mocking.html

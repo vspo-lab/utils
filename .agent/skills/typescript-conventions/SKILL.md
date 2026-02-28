@@ -1,14 +1,45 @@
 ---
-name: TypeScript規約
-description: Zod Schema Firstによる型定義、satisfiesオペレータ、型安全パターン。interface直書き・as禁止。
+name: typescript-conventions
+description: Type definitions via Zod Schema First, satisfies operator, type-safe patterns. No direct interface definitions, no "as" assertions.
 ---
 
-# トリガー条件
+# Trigger Conditions
 
-- 新しい型やスキーマを定義するとき
-- interface や type を直接書こうとしたとき
-- 型アサーション（as）を使おうとしたとき
+- When defining new types or schemas
+- When about to write an interface or type alias directly
+- When about to use a type assertion (`as`)
 
-# 参照ドキュメント
+# Rules
 
-- `docs/web-frontend/typescript.md` - Schema-First Development、satisfies、型安全パターン
+## Zod Schema First
+
+All types are derived from Zod schemas. Do not write `interface` or standalone `type` definitions.
+
+```ts
+import { z } from "zod";
+
+const UserSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  email: z.string().email(),
+});
+
+type User = z.infer<typeof UserSchema>;
+```
+
+## satisfies Operator
+
+Use `satisfies` instead of `as` for type-safe narrowing without losing literal types.
+
+```ts
+const config = {
+  port: 3000,
+  host: "localhost",
+} satisfies ServerConfig;
+```
+
+## Prohibited Patterns
+
+- `as` type assertions — use type guards or `satisfies` instead
+- Direct `interface` definitions — use Zod schema + `z.infer`
+- `any` type — use `unknown` and narrow with type guards

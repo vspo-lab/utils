@@ -1,30 +1,30 @@
 # Utility Libraries (@vspo-lab/utils)
 
-## 行動の指針
+## Guiding Principles
 
-- エラーハンドリング: `Result` 型を使う (`import { wrap, Ok, Err, AppError } from "@vspo-lab/error"`)。try-catch 禁止。
-- 型定義: Zod Schema First (`z.infer<typeof schema>`)。明示的な interface 禁止。
-- シンプルさ: 不要なコード削除、3回以上の重複時のみ抽象化、早すぎる最適化禁止。
-- 関数ドキュメント: 公開関数に JSDoc で事前条件・事後条件・冪等性を記述する。
-- コード変更後は `./scripts/post-edit-check.sh` を実行すること。
+- Error handling: Use the `Result` type (`import { wrap, Ok, Err, AppError } from "@vspo-lab/error"`). No try-catch.
+- Type definitions: Zod Schema First (`z.infer<typeof schema>`). No explicit interface definitions.
+- Simplicity: Delete unnecessary code, abstract after 3+ duplications, no premature optimization.
+- Function documentation: Add JSDoc with preconditions, postconditions, and idempotency to public functions.
+- After code changes, run `./scripts/post-edit-check.sh`.
 
-## Copilot レビュー出力ルール
+## Copilot Review Output Rules
 
-- すべての指摘で「どこの何に違反しているか」を明示すること。
-- 指摘は必ず次の形式で出力すること:
-  - `違反箇所`: `path/to/file:line`（PR差分上の場所）
-  - `違反ルール`: `ルールの所在ファイル` + `見出し/項目名`
-  - `違反内容`: 何がルールに反しているかを1文で具体化
-  - `修正案`: 最小変更での修正方針
-- `違反ルール` には、次のいずれかの一次情報のみを使うこと:
+- Every finding must state what rule is violated and where.
+- Findings must use this format:
+  - `Location`: `path/to/file:line` (location in PR diff)
+  - `Violated rule`: `source file` + `heading/item name`
+  - `Violation`: one sentence describing what breaks the rule
+  - `Suggested fix`: minimal-change fix approach
+- `Violated rule` must cite these primary sources:
   - `.github/copilot-instructions.md`
   - `AGENTS.md`
-  - `docs/` 配下の該当ドキュメント
-- ルール出典を示せない場合は「改善提案」として分離し、違反指摘として断定しないこと。
+  - Documents under `docs/`
+- If no rule source can be cited, separate the item as an "improvement suggestion" rather than asserting it as a violation.
 
-## 参照ドキュメント
+## Reference Documents
 
-- `docs/security/` - lint設定、textlint設定
-- `docs/testing/` - テスト戦略
-- `docs/plan/` - 機能計画
-- `.agent/skills/` - AI エージェント用スキル定義
+- `docs/security/` — lint and textlint configuration
+- `docs/testing/` — testing strategy
+- `docs/plan/` — feature planning
+- `.agent/skills/` — AI agent skill definitions
