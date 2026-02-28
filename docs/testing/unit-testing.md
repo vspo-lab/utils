@@ -2,14 +2,15 @@
 
 ## 目的
 
-- 純粋関数・ドメインモデル・小さなユースケースの振る舞いを高速に保証する
+- 純粋関数・ユーティリティの振る舞いを高速に保証する
 - 仕様の粒度を小さく保ち、TDD の最短フィードバックループを回す
 
 ## 対象
 
-- `packages/*` の純粋ロジック
-- `services/api/domain/**` のドメインロジック
-- `services/web/shared/lib/**` のユーティリティ
+- `api/src/**` の API ユーティリティ
+- `dayjs/**` の日時ユーティリティ
+- `errors/**` のエラーハンドリング
+- `logging/**` のロギングユーティリティ
 
 ## 実装ルール
 
@@ -43,12 +44,10 @@ describe("normalizeText", () => {
 
 ## 実行コマンド
 
-- 全体: `pnpm test:unit`
-- APIのみ: `pnpm --filter api test:run`
-- Webのみ: `pnpm --filter web vitest run`
+- 全体: `pnpm -r exec vitest run`
+- 特定パッケージ: `pnpm --filter @vspo-lab/error exec vitest run`
 
 ## 参考（一次情報）
 
 - Vitest `test.each`: https://vitest.dev/api/#test-each
 - Vitest Mocking（過剰モックの注意）: https://vitest.dev/guide/mocking.html
-- t_wada方針: `docs/web-frontend/twada-tdd.md`

@@ -16,11 +16,7 @@ docs/plan/
 ├── README.md                    # 本ドキュメント
 └── <feature-name>/              # 機能ごとのディレクトリ
     ├── 00_OVERVIEW.md           # 機能概要、目的、スコープ
-    ├── 01_DOMAIN_MODEL.md       # エンティティ変更、ビジネスルール
-    ├── 02_DATA_ACCESS.md        # リポジトリ・DB変更
-    ├── 03_USECASE.md            # UseCase層の変更
-    ├── 04_API_INTERFACE.md      # APIエンドポイント仕様
-    ├── 05_FRONTEND.md           # フロントエンドUI仕様
+    ├── 01_DESIGN.md             # 型設計、公開API設計、依存関係
     └── CHECKLIST.md             # 実装チェックリスト（フェーズ・セッションノート）
 ```
 
@@ -34,14 +30,13 @@ feature ディレクトリと自動生成ファイルは名前形式が異なる
 あいまいな要件から構造化された仕様ドキュメントを作成する。
 
 - 要件をヒアリングし、上記のファイル構成で仕様を書き出す
-- 仕様は Clean Architecture のレイヤーに対応（Domain → Data Access → UseCase → Interface）
 - 未確定事項は `TBD` と明記し、次アクションを記録する
 
 ### Step 2: チェックリスト生成 (`/init-impl`)
 
 仕様を読み込み、フェーズ分けされた実装チェックリストを生成する。
 
-- 実装順序はボトムアップ: Domain → Data Access → UseCase → API → Frontend
+- 実装順序はボトムアップ: 型定義 → コアロジック → テスト → ビルド確認
 - 各フェーズに目標、チェックリスト、テストコマンド、セッションノートを含む
 - セッションノートには Done / Next / Risks・TODO を記録する
 
@@ -55,15 +50,11 @@ feature ディレクトリと自動生成ファイルは名前形式が異なる
 
 ## 仕様ファイル概要
 
-| ファイル | 内容 | 対応レイヤー |
-| --- | --- | --- |
-| `00_OVERVIEW.md` | 機能の目的、背景、スコープ、成功指標 | - |
-| `01_DOMAIN_MODEL.md` | 新規・変更エンティティ、ビジネスルール、Zod Schema | Domain |
-| `02_DATA_ACCESS.md` | テーブル変更、リポジトリ変更、マイグレーション | Infrastructure |
-| `03_USECASE.md` | ユースケース定義、入出力、エラーケース | UseCase |
-| `04_API_INTERFACE.md` | エンドポイント、リクエスト/レスポンス、認証 | Infrastructure (HTTP) |
-| `05_FRONTEND.md` | ページ構成、コンポーネント、状態管理 | Frontend |
-| `CHECKLIST.md` | フェーズ分け実装チェックリスト、セッションノート | - |
+| ファイル | 内容 |
+| --- | --- |
+| `00_OVERVIEW.md` | 機能の目的、背景、スコープ、成功指標 |
+| `01_DESIGN.md` | Zod Schema、公開API（エクスポート）、依存パッケージ、型定義 |
+| `CHECKLIST.md` | フェーズ分け実装チェックリスト、セッションノート |
 
 ## チェックリスト構造
 
@@ -74,20 +65,21 @@ feature ディレクトリと自動生成ファイルは名前形式が異なる
 
 Spec: `docs/plan/<feature>/`
 
-## Phase 1: Domain Model
-Document: `01_DOMAIN_MODEL.md`
+## Phase 1: Implementation
+Document: `01_DESIGN.md`
 Status: Not started
 
 ### Goal
-ドメインモデルの実装とユニットテスト
+型定義とコアロジックの実装、ユニットテスト
 
 ### Checklist
 - [ ] Zod Schema 定義
-- [ ] コンパニオンオブジェクト実装
-- [ ] ドメインモデルのユニットテスト
+- [ ] コアロジック実装
+- [ ] ユニットテスト
+- [ ] エクスポート設定
 
 ### Testing
-pnpm test -- services/api/domain/
+pnpm -r exec vitest run
 
 ### Session Notes
 - Done:
@@ -96,89 +88,20 @@ pnpm test -- services/api/domain/
 
 ---
 
-## Phase 2: Data Access
-Document: `02_DATA_ACCESS.md`
+## Phase 2: Integration
 Status: Not started
 
 ### Goal
-リポジトリ実装とインテグレーションテスト
+ビルド確認と公開API検証
 
 ### Checklist
-- [ ] DB スキーマ定義（drizzle）
-- [ ] マイグレーション作成・実行
-- [ ] リポジトリ実装
-- [ ] インテグレーションテスト
+- [ ] ビルド成功確認（`pnpm build`）
+- [ ] 型チェック成功確認（`pnpm tsc`）
+- [ ] biome lint 通過
+- [ ] knip 未使用検出なし
 
 ### Testing
-pnpm test -- services/api/infra/repository/
-
-### Session Notes
-- Done:
-- Next:
-- Risks/TODO:
-
----
-
-## Phase 3: UseCase
-Document: `03_USECASE.md`
-Status: Not started
-
-### Goal
-ユースケース実装とテスト
-
-### Checklist
-- [ ] ユースケース実装
-- [ ] DI コンテナへの登録
-- [ ] ユースケーステスト
-
-### Testing
-pnpm test -- services/api/usecase/
-
-### Session Notes
-- Done:
-- Next:
-- Risks/TODO:
-
----
-
-## Phase 4: API Interface
-Document: `04_API_INTERFACE.md`
-Status: Not started
-
-### Goal
-API エンドポイント実装と API テスト
-
-### Checklist
-- [ ] Hono ルート定義（OpenAPI）
-- [ ] リクエスト/レスポンス Zod Schema
-- [ ] API テスト
-
-### Testing
-pnpm test -- services/api/infra/http/
-
-### Session Notes
-- Done:
-- Next:
-- Risks/TODO:
-
----
-
-## Phase 5: Frontend
-Document: `05_FRONTEND.md`
-Status: Not started
-
-### Goal
-フロントエンド実装と UI テスト
-
-### Checklist
-- [ ] App Router ルート作成
-- [ ] Feature モジュール作成（api/, components/, hooks/, types/）
-- [ ] Container コンポーネント
-- [ ] Presenter コンポーネント
-- [ ] UI テスト
-
-### Testing
-pnpm test -- services/web/
+./scripts/post-edit-check.sh
 
 ### Session Notes
 - Done:
@@ -186,7 +109,7 @@ pnpm test -- services/web/
 - Risks/TODO:
 ```
 
-仕様に記載のない層のフェーズは省略してよい（例: バックエンドのみの機能なら Phase 5 を省略）。
+仕様に記載のない層のフェーズは省略してよい。
 
 ## セッションノートの書き方
 
@@ -212,6 +135,3 @@ YYYY-MM-DD
 
 - `/plan-feature` - 仕様生成スキル
 - `/init-impl` - チェックリスト生成スキル
-- `docs/domain/` - プロジェクト全体のドメイン仕様
-- `docs/backend/server-architecture.md` - Clean Architecture 概要
-- `docs/web-frontend/architecture.md` - フロントエンドアーキテクチャ
