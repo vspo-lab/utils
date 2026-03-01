@@ -1,12 +1,3 @@
-import { defineConfig } from "tsup";
+import { createConfig } from "../tsup.config.base.js";
 
-export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["cjs", "esm"],
-  treeshake: true,
-  splitting: false,
-  sourcemap: true,
-  clean: true,
-  bundle: true,
-  dts: true,
-});
+export default createConfig("src/index.ts");

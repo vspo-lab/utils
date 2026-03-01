@@ -5,9 +5,9 @@
   "description": "",
   "scripts": {
     "build": "turbo build",
-    "biome:check": "biome check ./**/**",
-    "biome:format": "biome format --write ./**/**",
-    "biome:lint": "biome lint --apply ./**/**",
+    "biome:check": "biome check .",
+    "biome:format": "biome format --write .",
+    "biome:lint": "biome lint --apply .",
     "biome:unsafe-fix": "biome check --fix --unsafe",
     "knip": "knip",
     "tsc": "pnpm -r exec tsc --noEmit",

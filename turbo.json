@@ -6,9 +6,6 @@
       "outputs": ["dist/**"],
       "cache": true
     },
-    "biome:check": {},
-    "biome:format": {},
-    "biome:lint": {},
     "//#knip": {}
   }
 }

@@ -24,12 +24,7 @@
       "Bash(pnpm tsc)",
       "Bash(pnpm textlint)"
     ],
-    "deny": [
-      "Read(.env*)",
-      "Read(**/.env*)",
-      "Read(*.pem)",
-      "Read(*.key)"
-    ]
+    "deny": ["Read(.env*)", "Read(**/.env*)", "Read(*.pem)", "Read(*.key)"]
   },
   "hooks": {
     "PreToolUse": [
