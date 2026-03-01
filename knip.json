@@ -14,14 +14,7 @@
       "project": "**/*.ts"
     }
   },
-  "ignore": [
-    "**/dist/**",
-    "**/node_modules/**"
-  ],
   "ignoreBinaries": [],
-  "ignoreDependencies": [
-    "lefthook",
-    "textlint-rule-write-good"
-  ],
+  "ignoreDependencies": ["lefthook", "textlint-rule-write-good"],
   "ignoreExportsUsedInFile": true
 }

@@ -18,6 +18,12 @@ jobs:
 
       - name: Package build
         run: pnpm build
-      
+
+      - name: Type check
+        run: pnpm tsc
+
       - name: Run biome check
         run: pnpm biome:check
+
+      - name: Run knip
+        run: pnpm knip
