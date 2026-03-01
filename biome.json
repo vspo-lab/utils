@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -15,24 +15,17 @@
       "**/*.json",
       "**/*.jsonc",
       "!**/node_modules/**/*",
-      "!**/.nx/**/*",
-      "!**/.wrangler/**/*",
-      "!**/public/**/*",
       "!**/dist/**/*",
       "!**/build/**/*",
       "!**/tools/**/*",
       "!**/*.config.js",
-      "!**/.next/**/*",
       "!**/.turbo/**/*",
       "!**/.git/**/*",
       "!**/.vscode/**/*",
-      "!**/gen/**/*",
-      "!**/.open-next/**/*",
-      "!**/.mastra/**/*",
-      "!**/service/vspo-schedule/v2/web/**/*.d.ts",
       "!**/.pnpm-store/**/*",
       "!**/*.css",
-      "!**/service/vspo-schedule/v2/web/src/features/multiview/**/*"
+      "!**/tsconfig.json",
+      "!**/coverage/**/*"
     ]
   },
   "formatter": {

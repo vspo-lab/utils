@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "write-good": {
+      "passive": false,
+      "weasel": false,
+      "tooWordy": false
+    }
+  }
+}

@@ -3,3 +3,4 @@
 **/dist
 **/.turbo
 .pnpm-store
+.claude/.post_edit_check_pending

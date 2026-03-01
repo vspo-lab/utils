@@ -20,7 +20,8 @@
   ],
   "ignoreBinaries": [],
   "ignoreDependencies": [
-    "lefthook"
+    "lefthook",
+    "textlint-rule-write-good"
   ],
   "ignoreExportsUsedInFile": true
 }
