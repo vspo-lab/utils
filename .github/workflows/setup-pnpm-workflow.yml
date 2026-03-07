@@ -22,8 +22,8 @@ jobs:
       - name: Type check
         run: pnpm tsc
 
-      - name: Run biome check
-        run: pnpm biome:check
+      - name: Run lint and format check
+        run: pnpm check
 
       - name: Run knip
         run: pnpm knip
