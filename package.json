@@ -18,7 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^2.3.12",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.13.3",
     "knip": "^5.82.1",
     "lefthook": "^1.13.4",
     "semantic-release": "24.2.9",
@@ -30,7 +30,7 @@
   "packageManager": "pnpm@10.17.1",
   "engines": {
     "pnpm": ">=9.15.9",
-    "node": ">=20.18.0"
+    "node": ">=24.20.0"
   },
   "workspaces": [
     "api",
